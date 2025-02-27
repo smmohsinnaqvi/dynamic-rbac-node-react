@@ -19,7 +19,7 @@ const NavBar = () => {
       <Stack>
         <Box
           sx={{
-            background: `url(${assets.logo})`,
+            // background: `url(${assets?.logo})`,
             backgroundSize: "cover",
             width: "150px",
             height: "65px",

@@ -7,23 +7,11 @@ const RevenueCard = () => {
   return (
     <MNGridCard size={{ xs: 2, sm: 4.5, md: 4.5 }}>
       <Stack px={4} py={2} spacing={1} height={1}>
-        <Typography
-          fontFamily={"Inter,sans-serif"}
-          fontSize="22px"
-          fontWeight={500}
-        >
-          Revenues
-        </Typography>
+        <Typography variant="cardTitle">Revenues</Typography>
         <Stack>
-          <Stack
-            direction={"row"}
-            // justifyContent={"center"}
-            alignItems={"center"}
-            spacing={2}
-          >
+          <Stack direction={"row"} alignItems={"center"} spacing={2}>
             <Typography
               fontSize="48px"
-              //   lineHeight={"40px"}
               fontFamily={"Inter,sans-serif"}
               fontWeight={400}
             >

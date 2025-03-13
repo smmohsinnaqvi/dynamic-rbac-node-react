@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import AppRouter from "./AppRouter";
 import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "./Theme";
+import theme from "./Theme";
 
 const Content = () => {
   return <div>This is content</div>;

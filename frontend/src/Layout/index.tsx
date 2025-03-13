@@ -7,10 +7,9 @@ const Layout = ({ children }) => {
     <Box
       sx={{
         display: "flex",
-        height: "96.5vh",
+        height: "98.5vh",
         overflowY: "hidden",
-        py: 1,
-        px: 2,
+        pb: 0.5,
       }}
     >
       {/* <NavBar /> */}

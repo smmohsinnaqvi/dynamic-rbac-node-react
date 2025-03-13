@@ -9,6 +9,8 @@ import settings from "./svgs/Settings.svg";
 import report from "./svgs/Reports.svg";
 import conversation from "./svgs/Conversations.svg";
 import revenue from "./svgs/Revenue.svg";
+import geography from "./svgs/Geography.svg";
+
 export const assets = {
   bg,
   dashboard,
@@ -21,5 +23,6 @@ export const assets = {
   conversation,
   report,
   revenue,
+  geography,
 };
 export { orangeFarmLogo, dashboard, customer, settings };

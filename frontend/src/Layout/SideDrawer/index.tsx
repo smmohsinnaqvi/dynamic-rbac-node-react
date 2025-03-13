@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import {
+  Avatar,
   Box,
+  Chip,
   Icon,
   IconButton,
   List,
@@ -15,8 +17,16 @@ import {
 } from "@mui/material";
 import ArrowCircleRightRoundedIcon from "@mui/icons-material/ArrowCircleRightRounded";
 import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRounded";
-import MNSvgIcon from "../../assets/svgs/MySvgIcon";
 import { assets } from "../../assets";
+import { themePalette } from "../../Theme/colors";
+
+const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
+  borderRadius: theme.spacing(2),
+  "&:hover": {
+    backgroundColor: theme.palette.primary.light,
+    alignItems: "center",
+  },
+}));
 
 const SideDrawer = () => {
   const menuItems = [
@@ -35,26 +45,60 @@ const SideDrawer = () => {
       label: "About",
       route: "/about",
     },
+    {
+      icon: "report",
+      label: "All Reports",
+      route: "/",
+    },
+    {
+      icon: "geography",
+      label: "Geography",
+      route: "/settings",
+    },
+    {
+      icon: "conversation",
+      label: "Conversations",
+      route: "/about",
+    },
+    {
+      icon: "deals",
+      label: "Deals",
+      route: "/about",
+    },
+    {
+      icon: "exports",
+      label: "Export",
+      route: "/about",
+    },
   ];
 
   const [sideDrawerOpen, setSideDrawerOpen] = useState(true);
 
   const toggleSideDrawer = () => setSideDrawerOpen(!sideDrawerOpen);
   return (
-    <Box
+    // <Box
+
+    // >
+    <Stack
+      justifyContent={"space-between"}
       sx={{
-        width: sideDrawerOpen ? "15%" : "5.5%",
-        height: 1,
+        width: sideDrawerOpen ? "15%" : "4%",
+        minWidth: "70px",
         borderRadius: 2,
         backgroundColor: "#ffffff",
         boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
         position: "sticky",
-        // top: 0,
         transition: "width 0.3s ease-in-out",
-        overflow: "hidden",
+        height: 1,
+        overflowY: "auto",
+        overflowX: "hidden",
       }}
     >
-      <Stack position={"fixed"} width={sideDrawerOpen ? "15.5%" : "6%"}>
+      <Stack
+        position={"fixed"}
+        width={sideDrawerOpen ? "15.5%" : "4.5%"}
+        minWidth={"70px"}
+      >
         <IconButton
           sx={{ padding: "0px", display: "flex", justifyContent: "end" }}
           disableRipple={true}
@@ -73,33 +117,56 @@ const SideDrawer = () => {
         direction={"row"}
         width={1}
         alignItems={"center"}
-        p={4}
+        p={3}
       >
-        <img src={assets.orangeFarmLogo} height={28} width={28} alt="" />
-        <Typography
-          fontFamily={"Inter,sans-serif"}
-          sx={{
-            color: "#131313",
-            fontSize: "20px",
-            fontWeight: 700,
-            lineHeight: "16px",
-          }}
-          color="textPrimary"
-        >
-          OrangeFarm
-        </Typography>
+        <img src={assets.orangeFarmLogo} height={32} width={32} alt="" />
+        {sideDrawerOpen && <Typography variant="logo">OrangeFarm</Typography>}
       </Stack>
-      <Stack sx={{ p: 1 }}>
+      <Stack flexGrow={2} sx={{ p: 1 }} spacing={2}>
         {menuItems?.map((menuItem) => (
-          <MenuItem sx={{ m: 1 }}>
+          <StyledMenuItem key={menuItem.label}>
             <ListItemIcon>
               <img src={assets[menuItem?.icon]} height={24} width={24} alt="" />
             </ListItemIcon>
-            <ListItemText>{menuItem.label}</ListItemText>
-          </MenuItem>
+            {sideDrawerOpen && <ListItemText>{menuItem.label}</ListItemText>}
+          </StyledMenuItem>
         ))}
       </Stack>
-    </Box>
+      <Stack p={1} mb={5} spacing={2}>
+        <StyledMenuItem sx={{ alignItems: "center" }}>
+          <ListItemIcon>
+            <Avatar>H</Avatar>
+          </ListItemIcon>
+          <ListItemText>
+            <Stack direction={"column"} px={1}>
+              {sideDrawerOpen && (
+                <>
+                  <Typography>Mohsin Naqvi</Typography>
+                  <Chip
+                    size="small"
+                    sx={{
+                      width: "min-content",
+                      backgroundColor: themePalette.palette.primary.main,
+                      color: themePalette.palette.primary.contrastText,
+                    }}
+                    label="admin"
+                  />
+                </>
+              )}
+            </Stack>
+          </ListItemText>
+        </StyledMenuItem>
+        <StyledMenuItem>
+          <Box
+            component="img"
+            src={assets.logout}
+            alt="Logout Icon"
+            sx={{ height: 24, width: 24 }}
+          />
+          {sideDrawerOpen && <ListItemText sx={{ px: 1 }}>Logout</ListItemText>}
+        </StyledMenuItem>
+      </Stack>
+    </Stack>
   );
 };
 

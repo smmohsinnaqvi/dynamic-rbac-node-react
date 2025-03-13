@@ -1,49 +1,12 @@
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
+import { themePalette } from "./colors";
+import typographyTheme from "./typography";
+import buttonTheme from "./buttons";
 
-export const theme = createTheme({
-  components: {
-    MuiButtonBase: {
-      styleOverrides: {
-        root: {
-          transition: "all 300ms ease-in-out",
-        },
-      },
-    },
-    MuiMenuItem: {
-      styleOverrides: {
-        root: {
-          transition: "all 300ms ease-in-out",
-        },
-      },
-    },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          transition: "all 300ms ease-in-out",
-        },
-      },
-    },
-    MuiListItemButton: {
-      styleOverrides: {
-        root: {
-          transition: "all 300ms ease-in-out",
-        },
-      },
-    },
-    MuiIconButton: {
-      styleOverrides: {
-        root: {
-          transition: "all 300ms ease-in-out",
-        },
-      },
-    },
-    MuiStack: {
-      styleOverrides: {
-        root: {
-          transition: "all 300ms ease-in-out",
-        },
-      },
-    },
-    
-  },
+const theme = createTheme({
+  palette: themePalette.palette,
+  typography: typographyTheme.typography,
+  components: buttonTheme.components,
 });
+
+export default theme;

@@ -1,30 +1,33 @@
 import { Box, Stack } from "@mui/material";
-import NavBar from "./NavBar";
+import ActionBar from "./ActionBar";
 import SideDrawer from "./SideDrawer";
+import { Outlet } from "react-router-dom";
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
     <Box
       sx={{
         display: "flex",
-        height: "98.5vh",
+        height: "99.5vh",
         overflowY: "hidden",
         pb: 0.5,
       }}
     >
-      {/* <NavBar /> */}
       <SideDrawer />
       <Box
         sx={{
           flex: 1,
           width: 1,
           borderRadius: 4,
-          p: 2,
+          px: 1,
           height: "100%",
           overflowY: "auto",
+          overflowX: "hidden",
+          // mt: 1,
         }}
       >
-        {children}
+        {/* {children} */}
+        <Outlet />
       </Box>
     </Box>
   );

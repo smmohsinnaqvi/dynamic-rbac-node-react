@@ -18,7 +18,8 @@ import {
 import ArrowCircleRightRoundedIcon from "@mui/icons-material/ArrowCircleRightRounded";
 import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRounded";
 import { assets } from "../../assets";
-import { themePalette } from "../../Theme/colors";
+import { gray, themePalette } from "../../Theme/colors";
+import { useNavigate } from "react-router-dom";
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   borderRadius: theme.spacing(2),
@@ -29,6 +30,7 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 }));
 
 const SideDrawer = () => {
+  const navigate = useNavigate();
   const menuItems = [
     {
       icon: "dashboard",
@@ -86,7 +88,7 @@ const SideDrawer = () => {
         minWidth: "70px",
         borderRadius: 2,
         backgroundColor: "#ffffff",
-        boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+        boxShadow: `${gray[650]} 0px 3px 8px`,
         position: "sticky",
         transition: "width 0.3s ease-in-out",
         height: 1,
@@ -124,7 +126,10 @@ const SideDrawer = () => {
       </Stack>
       <Stack flexGrow={2} sx={{ p: 1 }} spacing={2}>
         {menuItems?.map((menuItem) => (
-          <StyledMenuItem key={menuItem.label}>
+          <StyledMenuItem
+            key={menuItem.label}
+            onClick={() => navigate(menuItem.route)}
+          >
             <ListItemIcon>
               <img src={assets[menuItem?.icon]} height={24} width={24} alt="" />
             </ListItemIcon>

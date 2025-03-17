@@ -1,0 +1,3 @@
+export const PERMISSIONS = {
+  VIEW_DASHBOARD: "VIEW_DASHBOARD",
+};

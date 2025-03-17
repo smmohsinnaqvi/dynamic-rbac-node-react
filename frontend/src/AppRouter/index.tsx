@@ -1,29 +1,22 @@
-import React, { Suspense, lazy } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "../Pages/Login";
+import { Suspense } from "react";
+import RouteHandler from "./RouteHandler";
 import Layout from "../Layout";
-import Dashboard from "../Pages/Dashboard";
+import privateRoutes from "./PrivateRoutes";
+import publicRoutes from "./PublicRoutes";
 
-// Lazy load your pages for code-splitting
-
-const AppRouter = () => {
+const Routes: React.FC = () => {
+  const isAuthenticated = true;
   return (
-    <Router>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route
-            path="/home"
-            element={
-              <Layout>
-                <Dashboard />
-              </Layout>
-            }
-          />
-        </Routes>
-        {/* </Layout> */}
-      </Suspense>
-    </Router>
+    <Suspense fallback={<></>}>
+      <>
+        {isAuthenticated ? (
+          <RouteHandler routes={privateRoutes} />
+        ) : (
+          <RouteHandler routes={publicRoutes} />
+        )}
+      </>
+    </Suspense>
   );
 };
 
-export default AppRouter;
+export default Routes;

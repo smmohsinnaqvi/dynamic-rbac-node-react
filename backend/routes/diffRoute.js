@@ -10,7 +10,7 @@ router.post("/check-diff", (req, res) => {
 
   try {
     const { oldPayBand, newPayBand } = req.body;
-    console.log(oldPayBand);
+    // console.log(oldPayBand);
     if (!oldPayBand || !newPayBand) {
       return res
         .status(400)
@@ -20,6 +20,23 @@ router.post("/check-diff", (req, res) => {
     const result = diff(oldPayBand, newPayBand, {
       embeddedObjKeys: { tags: "type", type: "id" },
     });
+
+    let action = "Updated";
+
+    const statusChange = result?.find((diff) => diff.key === "status");
+
+    if (statusChange) {
+      const { oldValue, value } = statusChange;
+
+      if (oldValue === "Not Submitted" && value === "Pending") {
+        action = "Submitted";
+      } else if (oldValue === "Pending" && value === "Approved") {
+        action = "Approved";
+      } else if (oldValue === "Pending" && value === "Rejected") {
+        action = "Rejected";
+      }
+    }
+    console.log(`the pay band has been ${action}`);
 
     return res.json({ difference: result });
   } catch (error) {

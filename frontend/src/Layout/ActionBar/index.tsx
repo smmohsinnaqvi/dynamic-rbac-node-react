@@ -7,14 +7,8 @@ interface ActionBarProps {
 }
 
 const ActionBar: React.FC<ActionBarProps> = ({ breadCrumbs }) => {
-  // const breadCrumbs = [
-  //   { label: "Home", path: "/" },
-  //   { label: "Dashboard", path: "/dashboard" },
-  //   { label: "Projects", path: "/projects" },
-  //   { label: "Current Project", path: "/projects/123" },
-  // ];
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
   const handleNavigation = (path: string) => {
     navigate(path);

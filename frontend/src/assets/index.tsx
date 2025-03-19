@@ -1,28 +1,32 @@
 import bg from "./images/background.jpg";
-import dashboard from "./svgs/Dashboard.svg";
 import orangeFarmLogo from "./svgs/OrangeFarmLogo.svg";
-import deals from "./svgs/Deals.svg";
-import exports from "./svgs/Exports.svg";
 import logout from "./svgs/Logout.svg";
-import customer from "./svgs/Customer.svg";
-import settings from "./svgs/Settings.svg";
-import report from "./svgs/Reports.svg";
-import conversation from "./svgs/Conversations.svg";
 import revenue from "./svgs/Revenue.svg";
-import geography from "./svgs/Geography.svg";
+import Conversations from "./svgs/Conversations";
+import Customer from "./svgs/Customer";
+import Dashboard from "./svgs/Dashboard";
+import Deals from "./svgs/Deals";
+import Exports from "./svgs/Exports";
+import Geography from "./svgs/Geography";
+import Reports from "./svgs/Reports";
+import Settings from "./svgs/Settings";
 
 export const assets = {
   bg,
-  dashboard,
   orangeFarmLogo,
-  deals,
-  exports,
   logout,
-  customer,
-  settings,
-  conversation,
-  report,
   revenue,
-  geography,
 };
-export { orangeFarmLogo, dashboard, customer, settings };
+export {
+  orangeFarmLogo,
+  logout,
+  revenue,
+  Conversations,
+  Customer,
+  Dashboard,
+  Deals,
+  Exports,
+  Geography,
+  Reports,
+  Settings,
+};

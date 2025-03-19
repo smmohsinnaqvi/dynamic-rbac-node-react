@@ -7,10 +7,6 @@ import About from "../../Pages/About";
 import Conversations from "../../Pages/Conversations";
 
 const privateRoutes = [
-  // {
-  //   path: "/",
-  //   component: <Navigate to={RouteConstants.ROUTE_DASHBOARD} />,
-  // },
   {
     path: "/",
     component: <Layout />,
@@ -33,32 +29,32 @@ const privateRoutes = [
       {
         path: RouteConstants.ROUTE_SETTINGS,
         component: <About />,
-        // permissions: [PERMISSIONS.VIEW_ABOUT],
+        permissions: [PERMISSIONS.VIEW_SETTINGS],
       },
       {
         path: RouteConstants.ROUTE_CONVERSATION,
         component: <Conversations />,
-        // permissions: [PERMISSIONS.VIEW_ABOUT],
+        permissions: [PERMISSIONS.VIEW_CONVERSATIONS],
       },
       {
         path: RouteConstants.ROUTE_DEALS,
         component: <About />,
-        // permissions: [PERMISSIONS.VIEW_ABOUT],
+        permissions: [PERMISSIONS.VIEW_DEALS],
       },
       {
         path: RouteConstants.ROUTE_EXPORT,
         component: <About />,
-        // permissions: [PERMISSIONS.VIEW_ABOUT],
+        permissions: [PERMISSIONS.VIEW_EXPORT],
       },
       {
         path: RouteConstants.ROUTE_GEOGRAPHY,
         component: <About />,
-        // permissions: [PERMISSIONS.VIEW_ABOUT],
+        permissions: [PERMISSIONS.VIEW_GEOGRAPHY],
       },
       {
         path: RouteConstants.ROUTE_REPORTS,
         component: <About />,
-        // permissions: [PERMISSIONS.VIEW_ABOUT],
+        permissions: [PERMISSIONS.VIEW_REPORTS],
       },
     ],
   },

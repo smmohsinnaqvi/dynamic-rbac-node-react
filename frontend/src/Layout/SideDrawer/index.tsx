@@ -32,6 +32,8 @@ import { gray, primary, themePalette } from "../../Theme/colors";
 import { useLocation, useNavigate } from "react-router-dom";
 import TabIcon from "../../assets/svgs/TabIcon";
 import { RouteConstants } from "../../constants/route-constants";
+import { PERMISSIONS } from "../../constants/permissions";
+import useAppPermission from "../../Hooks/useAppPermission";
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   borderRadius: theme.spacing(2),
@@ -54,41 +56,49 @@ const SideDrawer = () => {
       icon: Dashboard,
       label: "Dashboard",
       route: RouteConstants.ROUTE_DASHBOARD,
+      requiredPermission: [PERMISSIONS.VIEW_DASHBOARD],
     },
     {
       icon: Settings,
       label: "Settings",
       route: RouteConstants.ROUTE_SETTINGS,
+      requiredPermission: [PERMISSIONS.VIEW_SETTINGS],
     },
     {
       icon: Customer,
       label: "About",
       route: RouteConstants.ROUTE_ABOUT,
+      requiredPermission: [PERMISSIONS.VIEW_ABOUT],
     },
     {
       icon: Reports,
       label: "All Reports",
       route: RouteConstants.ROUTE_REPORTS,
+      requiredPermission: [PERMISSIONS.VIEW_REPORTS],
     },
     {
       icon: Geography,
       label: "Geography",
       route: RouteConstants.ROUTE_GEOGRAPHY,
+      requiredPermission: [PERMISSIONS.VIEW_GEOGRAPHY],
     },
     {
       icon: Conversations,
       label: "Conversations",
       route: RouteConstants.ROUTE_CONVERSATION,
+      requiredPermission: [PERMISSIONS.VIEW_CONVERSATIONS],
     },
     {
       icon: Deals,
       label: "Deals",
       route: RouteConstants.ROUTE_DEALS,
+      requiredPermission: [PERMISSIONS.VIEW_DEALS],
     },
     {
       icon: Exports,
       label: "Export",
       route: RouteConstants.ROUTE_EXPORT,
+      requiredPermission: [PERMISSIONS.VIEW_EXPORT],
     },
   ];
 
@@ -100,6 +110,8 @@ const SideDrawer = () => {
   const handleTabChange = (route: string) => {
     navigate(route);
   };
+
+  const { hasAnyPermission } = useAppPermission();
   return (
     <Stack
       justifyContent={"space-between"}
@@ -148,26 +160,32 @@ const SideDrawer = () => {
         {menuItems?.map((menuItem) => {
           const isActive = location.pathname.includes(menuItem.route);
           return (
-            <StyledMenuItem
-              sx={{
-                backgroundColor: isActive
-                  ? themePalette.palette.primary.light
-                  : "transparent",
-                color: isActive ? themePalette.palette.secondary.main : "unset",
-              }}
-              key={menuItem.label}
-              onClick={() => handleTabChange(menuItem?.route)}
-              onMouseEnter={() => setHovered(menuItem?.route)}
-              onMouseLeave={() => setHovered(null)}
-            >
-              <ListItemIcon sx={{ justifyContent: "center" }}>
-                <TabIcon
-                  icon={menuItem?.icon}
-                  isActive={isActive || hovered === menuItem?.route}
-                />
-              </ListItemIcon>
-              {sideDrawerOpen && <ListItemText>{menuItem.label}</ListItemText>}
-            </StyledMenuItem>
+            hasAnyPermission(menuItem?.requiredPermission) && (
+              <StyledMenuItem
+                sx={{
+                  backgroundColor: isActive
+                    ? themePalette.palette.primary.light
+                    : "transparent",
+                  color: isActive
+                    ? themePalette.palette.secondary.main
+                    : "unset",
+                }}
+                key={menuItem.label}
+                onClick={() => handleTabChange(menuItem?.route)}
+                onMouseEnter={() => setHovered(menuItem?.route)}
+                onMouseLeave={() => setHovered(null)}
+              >
+                <ListItemIcon sx={{ justifyContent: "center" }}>
+                  <TabIcon
+                    icon={menuItem?.icon}
+                    isActive={isActive || hovered === menuItem?.route}
+                  />
+                </ListItemIcon>
+                {sideDrawerOpen && (
+                  <ListItemText>{menuItem.label}</ListItemText>
+                )}
+              </StyledMenuItem>
+            )
           );
         })}
       </Stack>

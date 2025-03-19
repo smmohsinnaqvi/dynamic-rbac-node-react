@@ -3,7 +3,7 @@ import { PERMISSIONS } from "../constants/permissions";
 
 const useAppPermission = () => {
   // Assuming you get user permissions from context or redux store
-  const userPermissions = [PERMISSIONS.VIEW_DASHBOARD];
+  const userPermissions = [PERMISSIONS.VIEW_DASHBOARD, PERMISSIONS.VIEW_ABOUT];
 
   console.log(`user permissions - > ${userPermissions}`);
 

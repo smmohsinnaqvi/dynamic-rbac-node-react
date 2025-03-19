@@ -1,0 +1,36 @@
+.about-container {
+  padding: 20px 40px;
+  font-family: "Inter", sans-serif;
+  color: #2a2e34;
+}
+
+.about-container h1 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.about-container h2 {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.about-container p {
+  margin-bottom: 16px;
+}
+
+.about-container ul {
+  margin-bottom: 16px;
+}
+
+.about-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.about-container table th,
+.about-container table td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: center;
+}

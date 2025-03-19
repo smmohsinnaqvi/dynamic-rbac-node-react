@@ -17,70 +17,90 @@ import {
 } from "@mui/material";
 import ArrowCircleRightRoundedIcon from "@mui/icons-material/ArrowCircleRightRounded";
 import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRounded";
-import { assets } from "../../assets";
-import { gray, themePalette } from "../../Theme/colors";
-import { useNavigate } from "react-router-dom";
+import {
+  assets,
+  Conversations,
+  Customer,
+  Dashboard,
+  Deals,
+  Exports,
+  Geography,
+  Reports,
+  Settings,
+} from "../../assets";
+import { gray, primary, themePalette } from "../../Theme/colors";
+import { useLocation, useNavigate } from "react-router-dom";
+import TabIcon from "../../assets/svgs/TabIcon";
+import { RouteConstants } from "../../constants/route-constants";
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   borderRadius: theme.spacing(2),
+  "&": {
+    padding: "12px 12px",
+  },
+  transition: "all 0.3s ease-in-out",
   "&:hover": {
     backgroundColor: theme.palette.primary.light,
     alignItems: "center",
+    color: themePalette.palette.secondary.main,
   },
 }));
 
 const SideDrawer = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const menuItems = [
     {
-      icon: "dashboard",
+      icon: Dashboard,
       label: "Dashboard",
-      route: "/",
+      route: RouteConstants.ROUTE_DASHBOARD,
     },
     {
-      icon: "settings",
+      icon: Settings,
       label: "Settings",
-      route: "/settings",
+      route: RouteConstants.ROUTE_SETTINGS,
     },
     {
-      icon: "customer",
+      icon: Customer,
       label: "About",
-      route: "/about",
+      route: RouteConstants.ROUTE_ABOUT,
     },
     {
-      icon: "report",
+      icon: Reports,
       label: "All Reports",
-      route: "/",
+      route: RouteConstants.ROUTE_REPORTS,
     },
     {
-      icon: "geography",
+      icon: Geography,
       label: "Geography",
-      route: "/settings",
+      route: RouteConstants.ROUTE_GEOGRAPHY,
     },
     {
-      icon: "conversation",
+      icon: Conversations,
       label: "Conversations",
-      route: "/about",
+      route: RouteConstants.ROUTE_CONVERSATION,
     },
     {
-      icon: "deals",
+      icon: Deals,
       label: "Deals",
-      route: "/about",
+      route: RouteConstants.ROUTE_DEALS,
     },
     {
-      icon: "exports",
+      icon: Exports,
       label: "Export",
-      route: "/about",
+      route: RouteConstants.ROUTE_EXPORT,
     },
   ];
 
   const [sideDrawerOpen, setSideDrawerOpen] = useState(true);
+  const [hovered, setHovered] = useState(null);
 
   const toggleSideDrawer = () => setSideDrawerOpen(!sideDrawerOpen);
-  return (
-    // <Box
 
-    // >
+  const handleTabChange = (route: string) => {
+    navigate(route);
+  };
+  return (
     <Stack
       justifyContent={"space-between"}
       sx={{
@@ -124,18 +144,32 @@ const SideDrawer = () => {
         <img src={assets.orangeFarmLogo} height={32} width={32} alt="" />
         {sideDrawerOpen && <Typography variant="logo">OrangeFarm</Typography>}
       </Stack>
-      <Stack flexGrow={2} sx={{ p: 1 }} spacing={2}>
-        {menuItems?.map((menuItem) => (
-          <StyledMenuItem
-            key={menuItem.label}
-            onClick={() => navigate(menuItem.route)}
-          >
-            <ListItemIcon>
-              <img src={assets[menuItem?.icon]} height={24} width={24} alt="" />
-            </ListItemIcon>
-            {sideDrawerOpen && <ListItemText>{menuItem.label}</ListItemText>}
-          </StyledMenuItem>
-        ))}
+      <Stack flexGrow={2} sx={{ p: 1 }} spacing={1}>
+        {menuItems?.map((menuItem) => {
+          const isActive = location.pathname.includes(menuItem.route);
+          return (
+            <StyledMenuItem
+              sx={{
+                backgroundColor: isActive
+                  ? themePalette.palette.primary.light
+                  : "transparent",
+                color: isActive ? themePalette.palette.secondary.main : "unset",
+              }}
+              key={menuItem.label}
+              onClick={() => handleTabChange(menuItem?.route)}
+              onMouseEnter={() => setHovered(menuItem?.route)}
+              onMouseLeave={() => setHovered(null)}
+            >
+              <ListItemIcon sx={{ justifyContent: "center" }}>
+                <TabIcon
+                  icon={menuItem?.icon}
+                  isActive={isActive || hovered === menuItem?.route}
+                />
+              </ListItemIcon>
+              {sideDrawerOpen && <ListItemText>{menuItem.label}</ListItemText>}
+            </StyledMenuItem>
+          );
+        })}
       </Stack>
       <Stack p={1} mb={5} spacing={2}>
         <StyledMenuItem sx={{ alignItems: "center" }}>

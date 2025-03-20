@@ -1,1 +1,42 @@
+# Node.js dependencies
 node_modules/
+dist/
+build/
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# TypeScript build artifacts
+*.tsbuildinfo
+*.log
+
+# Editor & OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Debugging
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs & Temp files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+coverage/
+.tmp/
+.pnp/
+.pnp.js
+
+# Database files
+mongodb/
+data/
+dump/
+
+# Docker
+docker-compose.override.yml

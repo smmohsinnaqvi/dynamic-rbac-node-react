@@ -1,71 +1,48 @@
 import { Service } from "typedi";
 import { AuthService } from "./service";
-import { UserService } from "../user/service";
 import { Request, Response } from "express";
 
 @Service()
 export class AuthController {
-  constructor(
-    private authService: AuthService,
-    private userService: UserService
-  ) {}
+  constructor(private authService: AuthService) {}
 
-  // Signup
-  signup = async (req: Request, res: Response) => {
+  register = async (req: Request, res: Response) => {
     try {
-      const { email, password } = req.body;
-      const existingUser = await this.userService.findByEmail(email);
-      if (existingUser)
-        return res.status(400).json({ message: "User already exists" });
-
-      const hashedPassword = await this.authService.hashPassword(password);
-      const newUser = await this.userService.createUser(email, hashedPassword);
-
-      return res.status(201).json({ message: "User created", user: newUser });
-    } catch (error) {
-      return res.status(500).json({ message: "Server error", error });
+      const { name, email, password, role } = req.body;
+      let roleToAssign = role;
+      if (!role) {
+        roleToAssign = "Customer";
+      }
+      const user = await this.authService.register(
+        name,
+        email,
+        password,
+        roleToAssign
+      );
+      res.status(201).json({ message: "User registered successfully", user });
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
     }
   };
 
-  // Login
+  // 🔹 Login User
   login = async (req: Request, res: Response) => {
     try {
       const { email, password } = req.body;
-      const user = await this.userService.findByEmail(email);
-
-      if (!user)
-        return res.status(400).json({ message: "Invalid email or password" });
-
-      const isMatch = await this.authService.comparePassword(
-        password,
-        user.password
-      );
-      if (!isMatch)
-        return res.status(400).json({ message: "Invalid email or password" });
-
-      const accessToken = this.authService.generateAccessToken(user.id);
-      const refreshToken = this.authService.generateRefreshToken(user.id);
-
-      return res.json({ accessToken, refreshToken });
-    } catch (error) {
-      return res.status(500).json({ message: "Server error", error });
+      const data = await this.authService.login(email, password);
+      res.json(data);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
     }
   };
 
-  // Forgot Password
-  forgotPassword = async (req: Request, res: Response) => {
+  refreshAccessToken = async (req: Request, res: Response) => {
     try {
-      const { email, newPassword } = req.body;
-      const user = await this.userService.findByEmail(email);
-
-      if (!user) return res.status(400).json({ message: "User not found" });
-
-      const hashedPassword = await this.authService.hashPassword(newPassword);
-      await this.userService.updatePassword(user.id, hashedPassword);
-
-      return res.json({ message: "Password updated successfully" });
-    } catch (error) {
-      return res.status(500).json({ message: "Server error", error });
+      const { refreshToken } = req.body;
+      const data = await this.authService.refreshAccessToken(refreshToken);
+      res.json(data);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
     }
   };
 }

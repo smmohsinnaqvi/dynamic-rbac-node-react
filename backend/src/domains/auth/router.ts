@@ -16,8 +16,8 @@ export class AuthRouter {
   }
 
   private addRoutes() {
-    this.router.post("/signup", this.authController.signup);
+    this.router.post("/signup", this.authController.register);
     this.router.post("/login", this.authController.login);
-    this.router.post("/forgot-password", this.authController.forgotPassword);
+    this.router.post("/refresh", this.authController.refreshAccessToken);
   }
 }

@@ -4,6 +4,7 @@ import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { AuthRouter } from "./domains/auth/router";
+import { DBConnection } from "./common/db";
 
 dotenv.config({ path: ".env" });
 @Service()
@@ -11,7 +12,10 @@ export class Main {
   app: Application = express();
   port = process.env.PORT || 8000;
 
-  constructor(private authRouter: AuthRouter) {
+  constructor(
+    private authRouter: AuthRouter,
+    private dbConnection: DBConnection
+  ) {
     this.addMiddlewares();
     this.addRoutes();
     this.addStatusRoute();
@@ -19,7 +23,8 @@ export class Main {
 
   startServer() {
     this.app.listen(this.port, () => {
-      console.log(`Server running on PORT ${this.port}`);
+      console.info(`Server started at PORT ${this.port}`);
+      this.dbConnection.startConnection();
     });
   }
 

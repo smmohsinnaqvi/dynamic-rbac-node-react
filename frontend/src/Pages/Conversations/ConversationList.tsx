@@ -82,13 +82,14 @@ const conversations = [
   },
 ];
 
-const ConversationList = () => {
+const ConversationList = ({ selectedConversation, onSelectConversation }) => {
   return (
-    <Stack p={1} height={"91.5vh"} sx={{ overflowY: "auto" }}>
+    <Stack p={1} height={"91vh"} sx={{ overflowY: "auto" }}>
       <List>
         {conversations.map((conv) => (
           <ListItem
             key={conv.id}
+            onClick={() => onSelectConversation(conv)}
             sx={{
               color:
                 conv.unreadCount > 0
@@ -102,6 +103,10 @@ const ConversationList = () => {
               "&:hover": {
                 backgroundColor: themePalette.palette.primary.light,
               },
+              backgroundColor:
+                selectedConversation?.id === conv?.id
+                  ? themePalette.palette.primary.light
+                  : "unset",
             }}
           >
             <ListItemText

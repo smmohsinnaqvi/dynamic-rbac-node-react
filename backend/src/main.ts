@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { AuthRouter } from "./domains/auth/router";
 import { DBConnection } from "./common/db";
+import { RoleRouter } from "./domains/role/router";
 
 dotenv.config({ path: ".env" });
 @Service()
@@ -14,6 +15,7 @@ export class Main {
 
   constructor(
     private authRouter: AuthRouter,
+    private roleRouter: RoleRouter,
     private dbConnection: DBConnection
   ) {
     this.addMiddlewares();
@@ -35,6 +37,7 @@ export class Main {
 
   private addRoutes() {
     this.app.use("/auth", this.authRouter.getRoutes());
+    this.app.use("/role", this.roleRouter.getRoutes());
   }
   private addStatusRoute() {
     this.app.get("/status", (req: Request, res: Response) => {

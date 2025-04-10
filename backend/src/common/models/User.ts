@@ -1,10 +1,11 @@
 import mongoose, { Schema, Document } from "mongoose";
+import { IRole } from "./Role";
 
 export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  role: mongoose.Types.ObjectId;
+  role: mongoose.Types.ObjectId | IRole; // Allow both ObjectId & Populated Role
 }
 
 const UserSchema = new Schema<IUser>(

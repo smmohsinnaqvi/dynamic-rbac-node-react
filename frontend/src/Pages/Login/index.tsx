@@ -1,33 +1,54 @@
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { Box, Stack, TextField, Typography } from "@mui/material";
+import React from "react";
+import { themePalette } from "../../Theme/colors";
 import { assets } from "../../assets";
-export default function Login() {
+
+const Login = () => {
   return (
-    <>
-      <Box
-        sx={{
-          background: `url(${assets.bg})`,
-          backgroundSize: "cover",
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+    <Stack
+      height={"96vh"}
+      overflow={"hidden"}
+      sx={{ backgroundColor: themePalette.palette.common.white, px: 3, py: 2 }}
+    >
+      <Stack
+        width={1}
+        height={1}
+        sx={{ border: "1px solid black" }}
+        direction={"row"}
       >
-        <Stack
-          sx={{ backgroundColor: "#ffffff8f" }}
-          width={500}
-          height={600}
-          border={`2px solid #fff`}
-          borderRadius={"16px"}
-          pt={4}
-          px={4}
-        >
-          <Stack direction={"column"} spacing={4}>
-            <TextField label="Email" placeholder="Enter Email Address" />
-            <TextField label="Password" placeholder="Enter Password" />
+        <Stack width={1} justifyContent={"center"} alignItems={"center"}>
+          <Stack
+            height={0.5}
+            width={"70%"}
+            border={`1px solid black`}
+            spacing={2}
+          >
+            <Typography variant="cardTitle">Login</Typography>
+            <Typography>Login to access your OrangeFarm account</Typography>
+            <TextField
+              label="email"
+              title="Email"
+              placeholder="Enter your email"
+            />
+            <TextField
+              label="email"
+              title="Email"
+              placeholder="Enter your email"
+            />
           </Stack>
         </Stack>
-      </Box>
-    </>
+        <Stack width={1} justifyContent={"center"} alignItems={"center"}>
+          <Box
+            component="img"
+            src={assets.login}
+            alt="Logout Icon"
+            width={800}
+            height={800}
+          />
+        </Stack>
+      </Stack>
+    </Stack>
   );
-}
+};
+
+export default Login;

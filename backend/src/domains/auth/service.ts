@@ -4,8 +4,15 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { Role } from "../../common/models/Role";
 import { User } from "../../common/models/User";
+import { Permission } from "../../common/models/Permission";
 
 dotenv.config();
+
+interface ITokenPayload {
+  userId: string;
+  email: string;
+  role: string;
+}
 
 @Service()
 export class AuthService {
@@ -26,14 +33,14 @@ export class AuthService {
     return await bcrypt.compare(password, hashedPassword);
   }
 
-  generateAccessToken(userInfo: any): string {
-    return jwt.sign({ userInfo }, this.ACCESS_TOKEN_SECRET, {
+  generateAccessToken(tokenPayload: ITokenPayload): string {
+    return jwt.sign({ tokenPayload }, this.ACCESS_TOKEN_SECRET, {
       expiresIn: "15m",
     });
   }
 
-  generateRefreshToken(userInfo: any): string {
-    return jwt.sign({ userInfo }, this.REFRESH_TOKEN_SECRET, {
+  generateRefreshToken(tokenPayload: ITokenPayload): string {
+    return jwt.sign({ tokenPayload }, this.REFRESH_TOKEN_SECRET, {
       expiresIn: "7d",
     });
   }
@@ -64,35 +71,41 @@ export class AuthService {
 
   // 🔹 Login User & Generate Tokens
   async login(email: string, password: string) {
-    const user = await User.findOne({ email }).populate("role");
+    const user = await User.findOne({ email });
     if (!user) throw new Error("Invalid email");
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await this.comparePassword(password, user.password);
     if (!isMatch) throw new Error("Incorrect password");
 
-    const role = await Role.findById(user.role).populate("permissions");
+    console.log("User -->", user);
 
-    const accessToken = this.generateAccessToken({
-      userId: user._id,
-      email: user?.email,
-      role: role?.name,
-    });
-    const refreshToken = this.generateRefreshToken({
-      userId: user._id,
-      email: user?.email,
-      role: role?.name,
-    });
-    const permissions =
-      role?.permissions.map((p: any) => ({
-        key: `${p.action.toUpperCase()}_${p.resource.toUpperCase()}`,
-      })) || [];
+    const role = await Role.findById(user.role);
+    if (!role) throw new Error("Invalid Role");
+
+    const permissionList = [];
+    if (role?.permissions?.length) {
+      for (const perm of role.permissions) {
+        const permission = await Permission.findById(perm);
+        if (permission) {
+          permissionList.push(`${permission.action}-${permission.resource}`);
+        }
+      }
+    }
+
+    console.log("Role -->", role);
+
+    const tokenPayload = {
+      userId: user._id as string,
+      email: user.email,
+      role: role.name,
+    };
 
     return {
       email: user.email,
       role: role?.name,
-      permissions,
-      accessToken,
-      refreshToken,
+      permissionList,
+      accessToken: this.generateAccessToken(tokenPayload),
+      refreshToken: this.generateRefreshToken(tokenPayload),
     };
   }
 

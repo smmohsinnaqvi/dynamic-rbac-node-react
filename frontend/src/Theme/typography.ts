@@ -1,6 +1,6 @@
 import { createTheme, ThemeOptions } from "@mui/material";
 import { TypographyOptions } from "@mui/material/styles/createTypography";
-import { themePalette } from "./colors";
+import { gray, themePalette } from "./colors";
 
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
@@ -23,6 +23,12 @@ export const typographyTheme = createTheme(themePalette, {
       fontSize: "18px",
       fontWeight: 700,
       lineHeight: "16px",
+    },
+    cardTitle: {
+      color: gray[950],
+      fontSize: "26px",
+      lineHeight: "22px",
+      fontWeight: 700,
     },
   } as ExtendedTypographyOptions,
 } as ThemeOptions);

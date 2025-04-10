@@ -1,11 +1,11 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import React from "react";
 import ChatWindow from "./ChatWindow";
 
-const Conversation = () => {
+const Conversation = ({ selectedConversation }) => {
   return (
-    <Stack height={`91.5vh`} overflow={"auto"}>
-      <ChatWindow />
+    <Stack height={`91.5vh`}>
+      <ChatWindow selectedConversation={selectedConversation} />
     </Stack>
   );
 };

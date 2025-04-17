@@ -1,16 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Avatar,
   Box,
   Chip,
-  Icon,
   IconButton,
-  List,
-  ListItem,
   ListItemIcon,
   ListItemText,
   MenuItem,
-  MenuList,
   Stack,
   styled,
   Typography,
@@ -78,7 +74,7 @@ const SideDrawer = () => {
     },
     {
       icon: Geography,
-      label: "Geography",
+      label: "Project Requirements",
       route: RouteConstants.ROUTE_GEOGRAPHY,
       requiredPermission: [PERMISSIONS.VIEW_GEOGRAPHY],
     },

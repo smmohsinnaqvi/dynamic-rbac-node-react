@@ -1,16 +1,27 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import { gray, themePalette } from "../../Theme/colors";
 
-const MessageBubble = ({ message, isSender }: any) => {
+const MessageBubble = ({ message, isSender, name }: any) => {
+  const initials = name
+    ?.split(" ")
+    .map((word) => word[0])
+    .slice(0, 2)
+    .join("");
+
   return (
     <Box
       sx={{
         display: "flex",
         justifyContent: isSender ? "flex-end" : "flex-start",
         mb: 1,
+        alignItems: "flex-end",
       }}
     >
+      {!isSender && (
+        <Avatar sx={{ width: 32, height: 32, mr: 1 }}>{initials}</Avatar>
+      )}
+
       <Box
         sx={{
           maxWidth: "60%",
@@ -31,6 +42,10 @@ const MessageBubble = ({ message, isSender }: any) => {
           {message?.timestamp}
         </Typography>
       </Box>
+
+      {isSender && (
+        <Avatar sx={{ width: 32, height: 32, ml: 1 }}>{initials}</Avatar>
+      )}
     </Box>
   );
 };

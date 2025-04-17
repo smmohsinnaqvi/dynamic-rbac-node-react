@@ -1,28 +1,40 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Box, TextField, IconButton, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  TextField,
+  IconButton,
+  Stack,
+  Typography,
+  Avatar,
+} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import MessageBubble from "./MessageBubble";
 import { gray, primary, themePalette } from "../../Theme/colors";
+import { assets, Option, PhoneCall, Video } from "../../assets";
+import TabIcon from "../../assets/svgs/TabIcon";
 
 const ChatWindow = ({ selectedConversation }) => {
   console.log(selectedConversation);
-  const [messages, setMessages] = useState([
-    { text: "Hey! How's it going?", isSender: false, timestamp: "2 mins ago" },
-    {
-      text: "All good! What about you?",
-      isSender: true,
-      timestamp: "3 mins ago",
-    },
-  ]);
+  const [messages, setMessages] = useState(selectedConversation?.messages);
   const [newMessage, setNewMessage] = useState("");
+  const [hovered, setHovered] = useState(null);
   const myMessage = useRef(null);
+
+  useEffect(() => {
+    setMessages(selectedConversation?.messages);
+  }, [selectedConversation]);
 
   const handleSendMessage = () => {
     if (newMessage.trim() === "") return;
 
     setMessages([
       ...messages,
-      { text: newMessage, isSender: true, timestamp: "1 sec ago" },
+      {
+        text: newMessage,
+        isSender: true,
+        createdBy: "Mohsin Naqvi",
+        timestamp: "1 sec ago",
+      },
     ]);
     setNewMessage("");
     if (myMessage && myMessage.current) {
@@ -38,12 +50,76 @@ const ChatWindow = ({ selectedConversation }) => {
   return (
     <>
       <Stack
-        height={"50px"}
+        direction={"row"}
+        height={"70px"}
         borderBottom={`1px solid ${gray[650]}`}
-        justifyContent={"center"}
         px={2}
+        justifyContent={"space-between"}
+        alignItems={"center"}
+        sx={{ backgroundColor: themePalette.palette.common.white }}
       >
-        <Typography>{selectedConversation?.name}</Typography>
+        <Stack direction={"row"} alignItems={"center"} spacing={2}>
+          <Avatar>
+            {selectedConversation?.name
+              ?.split(" ")
+              .map((word) => word[0])
+              .slice(0, 2)
+              .join("")}
+          </Avatar>
+
+          <Typography>{selectedConversation?.name}</Typography>
+        </Stack>
+        <Stack direction={"row"} px={2} spacing={2}>
+          <Stack
+            sx={{
+              border: `1px solid ${
+                hovered === "Phone" ? primary[500] : gray[650]
+              }`,
+              borderRadius: 2,
+              p: 1,
+              "&:hover": {
+                backgroundColor: themePalette.palette.primary.light,
+              },
+            }}
+            onMouseEnter={() => setHovered("Phone")}
+            onMouseLeave={() => setHovered(null)}
+          >
+            <TabIcon icon={PhoneCall} isActive={hovered === "Phone"} />
+          </Stack>
+
+          <Stack
+            sx={{
+              border: `1px solid ${
+                hovered === "Video" ? primary[500] : gray[650]
+              }`,
+              borderRadius: 2,
+              p: 1,
+              "&:hover": {
+                backgroundColor: themePalette.palette.primary.light,
+              },
+            }}
+            onMouseEnter={() => setHovered("Video")}
+            onMouseLeave={() => setHovered(null)}
+          >
+            <TabIcon icon={Video} isActive={hovered === "Video"} />
+          </Stack>
+          <Stack
+            sx={{
+              border: `1px solid ${
+                hovered === "Option" ? primary[500] : gray[650]
+              }`,
+              borderRadius: 2,
+              p: 1,
+              "&:hover": {
+                backgroundColor: themePalette.palette.primary.light,
+              },
+            }}
+            onMouseEnter={() => setHovered("Option")}
+            onMouseLeave={() => setHovered(null)}
+          >
+            <TabIcon icon={Option} isActive={hovered === "Option"} />
+          </Stack>
+        </Stack>
       </Stack>
       <Stack p={2} height={1} spacing={1} overflow={"auto"} ref={myMessage}>
         <Box
@@ -54,7 +130,12 @@ const ChatWindow = ({ selectedConversation }) => {
           }}
         >
           {messages?.map((msg: any, index) => (
-            <MessageBubble key={index} message={msg} isSender={msg?.isSender} />
+            <MessageBubble
+              key={index}
+              message={msg}
+              isSender={msg?.isSender}
+              name={msg?.createdBy}
+            />
           ))}
         </Box>
       </Stack>

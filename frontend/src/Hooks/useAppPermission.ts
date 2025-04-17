@@ -7,6 +7,7 @@ const useAppPermission = () => {
     PERMISSIONS.VIEW_ABOUT,
     PERMISSIONS.VIEW_SETTINGS,
     PERMISSIONS.VIEW_CONVERSATIONS,
+    PERMISSIONS.VIEW_GEOGRAPHY,
   ];
 
   console.log(`user permissions - > ${userPermissions}`);

@@ -6,19 +6,12 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import {
-  gray,
-  primary,
-  red,
-  secondary,
-  themePalette,
-} from "../../Theme/colors";
+import { gray, primary, red, themePalette } from "../../Theme/colors";
 import { assets } from "../../assets";
 import InputField from "../../Components/InputField";
 import { useNavigate } from "react-router-dom";
 import { RouteConstants } from "../../constants/route-constants";
-
-const Login = () => {
+const SignUp = () => {
   const navigate = useNavigate();
   return (
     <Stack
@@ -41,50 +34,56 @@ const Login = () => {
         direction={"row"}
       >
         <Stack width={1} justifyContent={"center"} alignItems={"center"}>
-          <Stack height={0.5} spacing={2} width={"60%"}>
-            <Typography variant="cardTitle">Login</Typography>
-            <Typography>Login to access your OrangeFarm account</Typography>
-            <InputField label="Email" value={""} onChange={() => {}} />
-            <InputField label="Password" value={""} onChange={() => {}} />
-            <Stack
-              direction={"row"}
-              justifyContent={"space-between"}
-              alignItems={"center"}
-            >
-              <Stack direction={"row"} alignItems={"center"}>
-                <Checkbox
-                  disableRipple
-                  checked={true}
-                  sx={{ pl: 0, borderRadius: 2 }}
-                />
-                <Typography>Remember me</Typography>
-              </Stack>
-              <Typography
-                sx={{ cursor: "pointer" }}
-                color={red[400]}
-                onClick={() => {
-                  navigate(RouteConstants.ROUTE_FORGOT_PASSWORD);
-                }}
-              >
-                Forgot Password ?
+          <Box
+            component="img"
+            src={assets.signUp}
+            alt="Sign Image"
+            width={800}
+            height={800}
+          />
+        </Stack>
+        <Stack width={1} justifyContent={"center"} alignItems={"center"}>
+          <Stack height={0.7} spacing={2} width={"60%"}>
+            <Typography variant="cardTitle">Sign up</Typography>
+            <Typography>
+              Let’s get you all st up so you can access your personal account.
+            </Typography>
+            <Stack direction={"row"} spacing={2}>
+              <InputField label="First Name" value="" onChange={() => {}} />
+              <InputField label="Last Name" value="" onChange={() => {}} />
+            </Stack>
+            <Stack direction={"row"} spacing={2}>
+              <InputField label="Email" value="" onChange={() => {}} />
+              <InputField label="Phone Number" value="" onChange={() => {}} />
+            </Stack>
+            <InputField label="Password" value="" onChange={() => {}} />
+            <InputField label="Confirm Password" value="" onChange={() => {}} />
+
+            <Stack alignItems={"center"} direction={"row"} width={1}>
+              <Checkbox checked={true} sx={{ pl: 0 }} />
+              <Typography>
+                I agree to all the{" "}
+                <span style={{ color: red[400], cursor: "pointer" }}>
+                  Terms
+                </span>{" "}
+                and{" "}
+                <span style={{ color: red[400], cursor: "pointer" }}>
+                  Privacy Policies
+                </span>
+                .
               </Typography>
             </Stack>
             <Button size="large" variant="contained" color="primary">
-              Login
+              Create account
             </Button>
-            <Typography variant="mec_body" sx={{ textAlign: "center" }}>
-              Don't have an account?
-              <Typography
-                variant="mec_body"
-                color={red[400]}
-                sx={{ cursor: "pointer" }}
-                onClick={() => {
-                  navigate(RouteConstants.ROUTE_SIGNUP);
-                }}
+            <Typography variant="mec_body">
+              Already have an account?{" "}
+              <span
+                style={{ color: red[400], cursor: "pointer" }}
+                onClick={() => navigate(RouteConstants.ROUTE_LOGIN)}
               >
-                {" "}
-                Sign Up
-              </Typography>
+                Login{" "}
+              </span>
             </Typography>
             <Stack
               width={1}
@@ -94,7 +93,7 @@ const Login = () => {
             >
               <Divider sx={{ flex: 1 }} />
               <Typography color={themePalette.palette.mecGray.main}>
-                Or login with
+                Or Sign up with
               </Typography>
               <Divider sx={{ flex: 1 }} />
             </Stack>
@@ -165,18 +164,9 @@ const Login = () => {
             </Stack>
           </Stack>
         </Stack>
-        <Stack width={1} justifyContent={"center"} alignItems={"center"}>
-          <Box
-            component="img"
-            src={assets.login}
-            alt="Login Image"
-            width={800}
-            height={800}
-          />
-        </Stack>
       </Stack>
     </Stack>
   );
 };
 
-export default Login;
+export default SignUp;

@@ -13,6 +13,13 @@ import Settings from "./svgs/Settings";
 import login from "./svgs/Login.svg";
 import signUp from "./svgs/Signup.svg";
 import forgotPassword from "./svgs/ForgotPassword.svg";
+import chatIllustration from "./svgs/Chat.svg";
+import PhoneCall from "./svgs/PhoneCall";
+import Video from "./svgs/Video";
+import Option from "./svgs/Option";
+import faceBookIcon from "./svgs/FacebookIcon.svg";
+import googleIcon from "./svgs/GoogleIcon.svg";
+import appleIcon from "./svgs/AppleIcon.svg";
 
 export const assets = {
   bg,
@@ -22,6 +29,10 @@ export const assets = {
   login,
   signUp,
   forgotPassword,
+  chatIllustration,
+  faceBookIcon,
+  googleIcon,
+  appleIcon,
 };
 export {
   orangeFarmLogo,
@@ -35,6 +46,9 @@ export {
   Geography,
   Reports,
   Settings,
+  PhoneCall,
+  Video,
+  Option,
   login,
   signUp,
   forgotPassword,

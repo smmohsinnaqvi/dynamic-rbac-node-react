@@ -5,6 +5,7 @@ import Layout from "../../Layout";
 import Dashboard from "../../Pages/Dashboard";
 import About from "../../Pages/About";
 import Conversations from "../../Pages/Conversations";
+import Requirements from "../../Pages/Requirements";
 
 const privateRoutes = [
   {
@@ -48,7 +49,7 @@ const privateRoutes = [
       },
       {
         path: RouteConstants.ROUTE_GEOGRAPHY,
-        component: <About />,
+        component: <Requirements />,
         permissions: [PERMISSIONS.VIEW_GEOGRAPHY],
       },
       {

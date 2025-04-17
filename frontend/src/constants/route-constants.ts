@@ -8,4 +8,8 @@ export const RouteConstants = {
   ROUTE_CONVERSATION: "/conversation",
   ROUTE_DEALS: "/deals",
   ROUTE_EXPORT: "/export",
+  ROUTE_SIGNUP: "/signup",
+  ROUTE_VERIFY: "/verify",
+  ROUTE_FORGOT_PASSWORD: "/forgot-password",
+  ROUTE_RESET_PASSWORD: "/reset-password",
 };

@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-import { themePalette } from "./colors";
+import { mecGrey, themePalette } from "./colors";
 
 const buttonTheme = createTheme(themePalette, {
   palette: themePalette.palette,
@@ -35,13 +35,21 @@ const buttonTheme = createTheme(themePalette, {
           lineHeight: "20px",
           fontFamily: "Inter",
         },
+        sizeLarge: {
+          height: "40px",
+          padding: "12px 20px",
+          fontSize: "14px",
+          fontWeight: 700,
+          lineHeight: "22px",
+          fontFamily: "Inter",
+        },
       },
       variants: [
         {
           props: { variant: "contained", color: "primary" },
           style: {
             backgroundColor: themePalette.palette.primary.main,
-            color: themePalette.palette.mecGray.main,
+            color: mecGrey[800],
             "&:hover": {
               backgroundColor: themePalette.palette.primary.dark,
             },

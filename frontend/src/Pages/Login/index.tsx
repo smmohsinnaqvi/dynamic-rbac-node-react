@@ -17,9 +17,40 @@ import { assets } from "../../assets";
 import InputField from "../../Components/InputField";
 import { useNavigate } from "react-router-dom";
 import { RouteConstants } from "../../constants/route-constants";
+import { useAppDispatch } from "../../redux/hooks";
+import { useLoginMutation } from "../../services/feature/authApi";
+import { useState } from "react";
+import { showSnackbar } from "../../redux/slices/snackBar.slice";
+import { setCredentials } from "../../redux/slices/auth.slice";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [loginCred, setLoginCred] = useState({ email: "", password: "" });
+  const [login, { isLoading, error }] = useLoginMutation();
+  const dispatch = useAppDispatch();
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setLoginCred((prevCred) => ({
+      ...prevCred,
+      [name]: value,
+    }));
+  };
+
+  const handleLogin = async () => {
+    try {
+      // Unwrap the result to get the data directly
+      const res = await login(loginCred).unwrap();
+      dispatch(setCredentials(res)); // res will directly contain user, accessToken, etc.
+      navigate(RouteConstants.ROUTE_ENTRY);
+
+      dispatch(
+        showSnackbar({ message: "Login successful", severity: "success" })
+      );
+    } catch (err) {
+      dispatch(showSnackbar({ message: err.message, severity: "error" }));
+    }
+  };
   return (
     <Stack
       height={"96.5vh"}
@@ -44,8 +75,18 @@ const Login = () => {
           <Stack height={0.5} spacing={2} width={"60%"}>
             <Typography variant="cardTitle">Login</Typography>
             <Typography>Login to access your OrangeFarm account</Typography>
-            <InputField label="Email" value={""} onChange={() => {}} />
-            <InputField label="Password" value={""} onChange={() => {}} />
+            <InputField
+              label="Email"
+              name="email"
+              value={loginCred?.email}
+              onChange={handleInputChange}
+            />
+            <InputField
+              label="Password"
+              name="password"
+              value={loginCred?.password}
+              onChange={handleInputChange}
+            />
             <Stack
               direction={"row"}
               justifyContent={"space-between"}
@@ -69,7 +110,12 @@ const Login = () => {
                 Forgot Password ?
               </Typography>
             </Stack>
-            <Button size="large" variant="contained" color="primary">
+            <Button
+              size="large"
+              variant="contained"
+              color="primary"
+              onClick={handleLogin}
+            >
               Login
             </Button>
             <Typography variant="mec_body" sx={{ textAlign: "center" }}>

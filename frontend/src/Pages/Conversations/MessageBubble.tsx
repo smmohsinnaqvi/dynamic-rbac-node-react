@@ -1,14 +1,9 @@
 import React from "react";
 import { Avatar, Box, Typography } from "@mui/material";
 import { gray, themePalette } from "../../Theme/colors";
+import CommonAvatar from "../../Components/Avatar";
 
 const MessageBubble = ({ message, isSender, name }: any) => {
-  const initials = name
-    ?.split(" ")
-    .map((word) => word[0])
-    .slice(0, 2)
-    .join("");
-
   return (
     <Box
       sx={{
@@ -19,13 +14,18 @@ const MessageBubble = ({ message, isSender, name }: any) => {
       }}
     >
       {!isSender && (
-        <Avatar sx={{ width: 32, height: 32, mr: 1 }}>{initials}</Avatar>
+        <CommonAvatar
+          firstName={`${name?.split(" ")[0]}`}
+          lastName={`${name?.split(" ")[1]}`}
+          size="small"
+        />
       )}
 
       <Box
         sx={{
           maxWidth: "60%",
           p: 1.5,
+          mx: 1,
           borderRadius: 2,
           backgroundColor: isSender
             ? gray[400]
@@ -44,7 +44,11 @@ const MessageBubble = ({ message, isSender, name }: any) => {
       </Box>
 
       {isSender && (
-        <Avatar sx={{ width: 32, height: 32, ml: 1 }}>{initials}</Avatar>
+        <CommonAvatar
+          firstName={`${name?.split(" ")[0]}`}
+          lastName={`${name?.split(" ")[1]}`}
+          size="small"
+        />
       )}
     </Box>
   );

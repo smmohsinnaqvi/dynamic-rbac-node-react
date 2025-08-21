@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
-const { Permission } = require("./models/Permission");
+import { Permission } from "../common/models/Permission";
+
+import mongoose from "mongoose";
 
 const MONGO_URI = "mongodb://localhost:27017/OrangeFarm";
 
@@ -11,8 +12,13 @@ const seedPermissions = async () => {
     const permissions = [
       {
         resource: "dashboard",
-        action: "view",
+        action: "read",
         description: "view dashboard access",
+      },
+      {
+        resource: "dashboard",
+        action: "update",
+        description: "up dashboard access",
       },
       {
         resource: "about",
@@ -22,6 +28,16 @@ const seedPermissions = async () => {
       {
         resource: "settings",
         action: "create",
+        description: "create new roles",
+      },
+      {
+        resource: "settings",
+        action: "read",
+        description: "create new roles",
+      },
+      {
+        resource: "settings",
+        action: "update",
         description: "create new roles",
       },
       {

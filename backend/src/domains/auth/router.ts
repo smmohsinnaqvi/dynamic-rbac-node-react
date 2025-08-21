@@ -18,6 +18,6 @@ export class AuthRouter {
   private addRoutes() {
     this.router.post("/signup", this.authController.register);
     this.router.post("/login", this.authController.login);
-    this.router.post("/refresh", this.authController.refreshAccessToken);
+    this.router.post("/refresh-access", this.authController.refreshAccessToken);
   }
 }

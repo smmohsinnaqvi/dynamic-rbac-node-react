@@ -1,4 +1,5 @@
 export const RouteConstants = {
+  ROUTE_ENTRY: "/",
   ROUTE_DASHBOARD: "/dashboard",
   ROUTE_LOGIN: "/login",
   ROUTE_ABOUT: "/about",

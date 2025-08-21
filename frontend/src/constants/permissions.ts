@@ -1,10 +1,10 @@
 export const PERMISSIONS = {
-  VIEW_DASHBOARD: "VIEW_DASHBOARD",
-  VIEW_ABOUT: "VIEW_ABOUT",
-  VIEW_SETTINGS: "VIEW_SETTINGS",
-  VIEW_REPORTS: "VIEW_REPORTS",
-  VIEW_GEOGRAPHY: "VIEW_GEOGRAPHY",
-  VIEW_CONVERSATIONS: "VIEW_CONVERSATIONS",
-  VIEW_DEALS: "VIEW_DEALS",
-  VIEW_EXPORT: "VIEW_EXPORT",
+  VIEW_DASHBOARD: "read-dashboard",
+  VIEW_ABOUT: "read-about",
+  VIEW_SETTINGS: "read-settings",
+  VIEW_REPORTS: "read-reports",
+  VIEW_GEOGRAPHY: "read-geography",
+  VIEW_CONVERSATIONS: "read-conversation",
+  VIEW_DEALS: "read-deals",
+  VIEW_EXPORT: "read-export",
 };

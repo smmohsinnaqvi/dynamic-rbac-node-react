@@ -1,16 +1,9 @@
 import { PERMISSIONS } from "../constants/permissions";
+import { useAppSelector } from "../redux/hooks";
 
 const useAppPermission = () => {
-  // Assuming you get user permissions from context or redux store
-  const userPermissions = [
-    PERMISSIONS.VIEW_DASHBOARD,
-    PERMISSIONS.VIEW_ABOUT,
-    PERMISSIONS.VIEW_SETTINGS,
-    PERMISSIONS.VIEW_CONVERSATIONS,
-    PERMISSIONS.VIEW_GEOGRAPHY,
-  ];
-
-  console.log(`user permissions - > ${userPermissions}`);
+  const { user } = useAppSelector((state) => state.auth);
+  const userPermissions = user?.permissionList;
 
   // Function to check if user has **all the permissions**
   const hasAllPermission = (requiredPermissions = []) => {

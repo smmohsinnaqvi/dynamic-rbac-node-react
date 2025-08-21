@@ -30,6 +30,9 @@ import TabIcon from "../../assets/svgs/TabIcon";
 import { RouteConstants } from "../../constants/route-constants";
 import { PERMISSIONS } from "../../constants/permissions";
 import useAppPermission from "../../Hooks/useAppPermission";
+import { logout } from "../../redux/slices/auth.slice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import CommonAvatar from "../../Components/Avatar";
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   borderRadius: theme.spacing(2),
@@ -46,7 +49,9 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 
 const SideDrawer = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const location = useLocation();
+  const { user } = useAppSelector((state) => state?.auth);
   const menuItems = [
     {
       icon: Dashboard,
@@ -82,7 +87,7 @@ const SideDrawer = () => {
       icon: Conversations,
       label: "Conversations",
       route: RouteConstants.ROUTE_CONVERSATION,
-      requiredPermission: [PERMISSIONS.VIEW_CONVERSATIONS],
+      // requiredPermission: [],
     },
     {
       icon: Deals,
@@ -105,6 +110,11 @@ const SideDrawer = () => {
 
   const handleTabChange = (route: string) => {
     navigate(route);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate(RouteConstants.ROUTE_LOGIN);
   };
 
   const { hasAnyPermission } = useAppPermission();
@@ -156,7 +166,8 @@ const SideDrawer = () => {
         {menuItems?.map((menuItem) => {
           const isActive = location.pathname.includes(menuItem.route);
           return (
-            hasAnyPermission(menuItem?.requiredPermission) && (
+            (!menuItem.requiredPermission ||
+              hasAnyPermission(menuItem.requiredPermission)) && (
               <StyledMenuItem
                 sx={{
                   backgroundColor: isActive
@@ -167,14 +178,14 @@ const SideDrawer = () => {
                     : "unset",
                 }}
                 key={menuItem.label}
-                onClick={() => handleTabChange(menuItem?.route)}
-                onMouseEnter={() => setHovered(menuItem?.route)}
+                onClick={() => handleTabChange(menuItem.route)}
+                onMouseEnter={() => setHovered(menuItem.route)}
                 onMouseLeave={() => setHovered(null)}
               >
                 <ListItemIcon sx={{ justifyContent: "center" }}>
                   <TabIcon
-                    icon={menuItem?.icon}
-                    isActive={isActive || hovered === menuItem?.route}
+                    icon={menuItem.icon}
+                    isActive={isActive || hovered === menuItem.route}
                   />
                 </ListItemIcon>
                 {sideDrawerOpen && (
@@ -188,13 +199,17 @@ const SideDrawer = () => {
       <Stack p={1} mb={5} spacing={2}>
         <StyledMenuItem sx={{ alignItems: "center" }}>
           <ListItemIcon>
-            <Avatar>H</Avatar>
+            <CommonAvatar
+              firstName={user?.firstName}
+              lastName={user?.lastName}
+              size="medium"
+            />
           </ListItemIcon>
           <ListItemText>
             <Stack direction={"column"} px={1}>
               {sideDrawerOpen && (
                 <>
-                  <Typography>Mohsin Naqvi</Typography>
+                  <Typography>{`${user?.firstName} ${user?.lastName}`}</Typography>
                   <Chip
                     size="small"
                     sx={{
@@ -202,7 +217,7 @@ const SideDrawer = () => {
                       backgroundColor: themePalette.palette.primary.main,
                       color: themePalette.palette.primary.contrastText,
                     }}
-                    label="admin"
+                    label={`${user?.role}`}
                   />
                 </>
               )}
@@ -216,7 +231,11 @@ const SideDrawer = () => {
             alt="Logout Icon"
             sx={{ height: 24, width: 24 }}
           />
-          {sideDrawerOpen && <ListItemText sx={{ px: 1 }}>Logout</ListItemText>}
+          {sideDrawerOpen && (
+            <ListItemText sx={{ px: 1 }} onClick={handleLogout}>
+              Logout
+            </ListItemText>
+          )}
         </StyledMenuItem>
       </Stack>
     </Stack>

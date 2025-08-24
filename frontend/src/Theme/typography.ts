@@ -78,12 +78,6 @@ export const typographyTheme = createTheme(themePalette, {
       lineHeight: "12px",
       fontWeight: 300,
     },
-    mec_body: {
-      fontFamily: "Inter",
-      fontSize: "14px",
-      fontWeight: 500,
-      lineHeight: "24px",
-    },
   } as ExtendedTypographyOptions,
 } as ThemeOptions);
 

@@ -27,10 +27,8 @@ const seedRoles = async () => {
       //     .map((p) => p._id),
       // },
       {
-        name: "Customer",
-        permissions: permissions
-          .filter((p) => p.action === "read" && p.resource === "about")
-          .map((p) => p._id),
+        name: "Admin",
+        permissions: permissions.map((p) => p._id),
       },
     ];
 

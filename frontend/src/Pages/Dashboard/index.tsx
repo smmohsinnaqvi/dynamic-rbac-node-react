@@ -1,16 +1,21 @@
-import React from "react";
-import { Breadcrumbs, Link, Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import MNGridCard from "../../Components/MNGridCard";
 import RevenueCard from "./Cards/RevenueCard";
 import LostDealCard from "./Cards/LostDealCard";
-import { gray, themePalette } from "../../Theme/colors";
-import theme from "../../Theme";
 import ActionBar from "../../Layout/ActionBar";
+import QuarterGoals from "./Cards/QuaterGoals";
+import CustomerCard from "./Cards/CutomerCard";
+import GrowthCard from "./Cards/GrowthCard";
+import MNGridCard from "../../Components/MNGridCard";
+import SummaryCard from "./Cards/SummaryCard";
+import ChatsCard from "./Cards/ChatsCard";
+import TopStatesCard from "./Cards/TopStatesCard";
+import NewDealsCard from "./Cards/NewDealsCard";
 const Dashboard = () => {
   const breadCrumbs = [{ label: "Dashboard", path: "/dashboard" }];
+
   return (
-    <Stack>
+    <Stack mb={1}>
       <ActionBar breadCrumbs={breadCrumbs} />
       <Grid
         my={2}
@@ -19,24 +24,48 @@ const Dashboard = () => {
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
         <RevenueCard />
-        <MNGridCard size={{ xs: 2, sm: 4.5, md: 4.5 }}></MNGridCard>
-        <MNGridCard size={{ xs: 2, sm: 3, md: 3 }}></MNGridCard>
-        <MNGridCard sx={{ height: 400 }} size={{ xs: 2, sm: 4, md: 6 }}>
-          <LostDealCard />
-        </MNGridCard>
-
-        <Grid sx={{ height: 200 }} size={{ xs: 2, sm: 4, md: 6 }}>
-          <Grid container spacing={2}>
-            <MNGridCard sx={{ height: 242 }} size={{ md: 12 }}></MNGridCard>
-
-            <MNGridCard sx={{ height: 142 }} size={{ md: 4 }}></MNGridCard>
-            <MNGridCard sx={{ height: 142 }} size={{ md: 4 }}></MNGridCard>
-            <MNGridCard sx={{ height: 142 }} size={{ md: 4 }}></MNGridCard>
-          </Grid>
+        <LostDealCard />
+        <QuarterGoals />
+      </Grid>
+      <Grid container spacing={3} columns={12} sx={{ mt: 1 }}>
+        <CustomerCard />
+        <Grid size={{ xs: 12, sm: 4, md: 6 }}>
+          <Stack height={440} justifyContent={"space-between"} spacing={2}>
+            <GrowthCard />
+            <Stack
+              direction={"row"}
+              spacing={3}
+              flex={1}
+              justifyContent={"center"}
+            >
+              <SummaryCard
+                label="Top month"
+                value={"November"}
+                subtitle="2019"
+                size={{ md: 4 }}
+                height={130}
+              />
+              <SummaryCard
+                label="Top year"
+                value={"2019"}
+                subtitle="96K sold so far"
+                size={{ md: 4 }}
+                height={130}
+              />
+              <SummaryCard
+                label="Top buyer"
+                value={"Mohsin Naqvi"}
+                subtitle="Oasis Organic Inc."
+                size={{ md: 4 }}
+                height={130}
+                isAvatar={true}
+              />
+            </Stack>
+          </Stack>
         </Grid>
-        <MNGridCard size={{ md: 3.5 }}></MNGridCard>
-        <MNGridCard size={{ md: 3.5 }}></MNGridCard>
-        <MNGridCard size={{ md: 5 }}></MNGridCard>
+        <ChatsCard />
+        <TopStatesCard />
+        <NewDealsCard />
       </Grid>
     </Stack>
   );

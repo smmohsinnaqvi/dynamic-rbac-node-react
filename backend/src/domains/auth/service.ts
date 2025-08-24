@@ -46,7 +46,9 @@ export class AuthService {
   }
 
   async register(
-    name: string,
+    firstName: string,
+    lastName: string,
+    phone: string,
     email: string,
     password: string,
     roleName: string
@@ -60,7 +62,9 @@ export class AuthService {
     if (!role) throw new Error("Role not found");
 
     const user = new User({
-      name,
+      firstName,
+      lastName,
+      phone,
       email,
       password: hashedPassword,
       role: role._id,
@@ -101,6 +105,10 @@ export class AuthService {
     };
 
     return {
+      userId: user?._id,
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      phone: user?.phone,
       email: user.email,
       role: role?.name,
       permissionList,

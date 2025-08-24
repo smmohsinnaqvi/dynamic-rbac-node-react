@@ -3,8 +3,12 @@ import React from "react";
 import ChatWindow from "./ChatWindow";
 import { assets } from "../../assets";
 import { gray } from "../../Theme/colors";
+import { useAppSelector } from "../../redux/hooks";
 
-const Conversation = ({ selectedConversation }) => {
+const Conversation = () => {
+  const selectedConversation = useAppSelector(
+    (state) => state?.chat.selectedConversation
+  );
   return (
     <Stack height={`91.5vh`}>
       {selectedConversation ? (
@@ -23,7 +27,7 @@ const Conversation = ({ selectedConversation }) => {
           <Box
             component={"img"}
             src={assets.chatIllustration}
-            alt="Logout Icon"
+            alt='No messages'
             sx={{ height: 600, width: 600 }}
           />
           {/* <Typography variant="body1" color={gray[800]}>

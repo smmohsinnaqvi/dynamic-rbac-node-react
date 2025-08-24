@@ -6,7 +6,6 @@ import Conversation from "./Conversation";
 import { gray, themePalette } from "../../Theme/colors";
 
 const Conversations = () => {
-  const [selectedConversation, setSelectedConversation] = useState(null);
   const breadCrumbs = [
     {
       label: `Conversations`,
@@ -27,10 +26,7 @@ const Conversations = () => {
               borderRadius: "0 0 0px 8px",
             }}
           >
-            <ConversationList
-              selectedConversation={selectedConversation}
-              onSelectConversation={setSelectedConversation}
-            />
+            <ConversationList />
           </Grid>
           <Grid
             size={9.5}
@@ -39,7 +35,7 @@ const Conversations = () => {
               borderRadius: "0 0 8px 0px",
             }}
           >
-            <Conversation selectedConversation={selectedConversation} />
+            <Conversation />
           </Grid>
         </Grid>
       </Stack>

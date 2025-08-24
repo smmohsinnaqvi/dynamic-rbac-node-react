@@ -2,21 +2,17 @@ import React from "react";
 import MNGridCard from "../../../Components/MNGridCard";
 import { Box, Stack, Typography } from "@mui/material";
 import { assets } from "../../../assets";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import { themePalette } from "../../../Theme/colors";
 
 const RevenueCard = () => {
   return (
     <MNGridCard size={{ xs: 2, sm: 4.5, md: 4.5 }}>
-      <Stack px={4} py={2} spacing={1} height={1}>
+      <Stack p={4} height={1} spacing={1}>
         <Typography variant="cardTitle">Revenues</Typography>
-        <Stack>
+        <Stack py={2}>
           <Stack direction={"row"} alignItems={"center"} spacing={2}>
-            <Typography
-              fontSize="48px"
-              fontFamily={"Inter,sans-serif"}
-              fontWeight={400}
-            >
-              15%
-            </Typography>
+            <Typography variant="card_h2">15%</Typography>
             <Box
               component="img"
               src={assets.revenue}
@@ -27,26 +23,24 @@ const RevenueCard = () => {
               }}
             />
           </Stack>
-          <Typography
-            fontSize="14px"
-            fontFamily={"Inter,sans-serif"}
-            fontWeight={400}
-            sx={{ color: "#454545" }}
-          >
+          <Typography variant="card_text1">
             Increase compared to last week
           </Typography>
         </Stack>
-        <Typography
+        <Stack
           height={1}
-          width={1}
-          alignContent={"center"}
-          fontSize="16px"
-          fontFamily={"Inter,sans-serif"}
-          fontWeight={400}
-          sx={{ color: "#734A00" }}
+          direction={"row"}
+          spacing={1}
+          alignItems={"center"}
+          sx={{ cursor: "pointer", width: "fit-content" }}
         >
-          {`Revenue report ->`}
-        </Typography>
+          <Typography alignContent={"center"} variant="card_click">
+            {`Revenue Reports`}
+          </Typography>
+          <ArrowRightAltIcon
+            sx={{ color: themePalette.palette.secondary.main }}
+          />
+        </Stack>
       </Stack>
     </MNGridCard>
   );

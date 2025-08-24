@@ -2,9 +2,10 @@ import { Suspense } from "react";
 import RouteHandler from "./RouteHandler";
 import privateRoutes from "./PrivateRoutes";
 import publicRoutes from "./PublicRoutes";
+import { useAppSelector } from "../redux/hooks";
 
 const Routes: React.FC = () => {
-  const isAuthenticated = true;
+  const { isAuthenticated } = useAppSelector((state) => state?.auth);
   return (
     <Suspense fallback={<></>}>
       <>

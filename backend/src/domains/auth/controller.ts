@@ -8,13 +8,15 @@ export class AuthController {
 
   register = async (req: Request, res: Response) => {
     try {
-      const { name, email, password, role } = req.body;
+      const { firstName, lastName, phone, email, password, role } = req.body;
       let roleToAssign = role;
       if (!role) {
-        roleToAssign = "Customer";
+        roleToAssign = "Admin";
       }
       const user = await this.authService.register(
-        name,
+        firstName,
+        lastName,
+        phone,
         email,
         password,
         roleToAssign
@@ -30,6 +32,7 @@ export class AuthController {
     try {
       const { email, password } = req.body;
       const data = await this.authService.login(email, password);
+      console.log(data);
       res.json(data);
     } catch (error: any) {
       res.status(400).json({ error: error.message });

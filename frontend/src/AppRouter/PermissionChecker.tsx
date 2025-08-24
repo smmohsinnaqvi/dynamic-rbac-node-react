@@ -8,17 +8,13 @@ const PermissionChecker = ({
 }) => {
   const { hasAllPermission, hasAnyPermission } = useAppPermission();
 
-  console.log("✅ Route Permissions:", permissions); // Check what route needs
-
   const hasPermission =
     permissionStrategy === "ANY"
       ? hasAnyPermission(permissions)
       : hasAllPermission(permissions);
 
-  console.log("🔍 Has Permission:", hasPermission); // Check final condition
-
   if (!hasPermission) {
-    return <Navigate to="/no-permission" replace />;
+    return <Navigate to='/no-permission' replace />;
   }
 
   return children;

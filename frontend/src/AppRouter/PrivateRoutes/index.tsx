@@ -15,7 +15,7 @@ const privateRoutes = [
     children: [
       {
         path: "/",
-        component: <Navigate to={RouteConstants.ROUTE_DASHBOARD} />,
+        component: <Navigate to={RouteConstants.ROUTE_ENTRY} />,
       },
       {
         path: RouteConstants.ROUTE_DASHBOARD,
@@ -35,7 +35,7 @@ const privateRoutes = [
       {
         path: RouteConstants.ROUTE_CONVERSATION,
         component: <Conversations />,
-        permissions: [PERMISSIONS.VIEW_CONVERSATIONS],
+        // permissions: [PERMISSIONS.VIEW_CONVERSATIONS],
       },
       {
         path: RouteConstants.ROUTE_DEALS,

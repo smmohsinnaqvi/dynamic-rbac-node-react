@@ -12,6 +12,7 @@ import MessageBubble from "./MessageBubble";
 import { gray, primary, themePalette } from "../../Theme/colors";
 import { assets, Option, PhoneCall, Video } from "../../assets";
 import TabIcon from "../../assets/svgs/TabIcon";
+import CommonAvatar from "../../Components/Avatar";
 
 const ChatWindow = ({ selectedConversation }) => {
   console.log(selectedConversation);
@@ -59,13 +60,10 @@ const ChatWindow = ({ selectedConversation }) => {
         sx={{ backgroundColor: themePalette.palette.common.white }}
       >
         <Stack direction={"row"} alignItems={"center"} spacing={2}>
-          <Avatar>
-            {selectedConversation?.name
-              ?.split(" ")
-              .map((word) => word[0])
-              .slice(0, 2)
-              .join("")}
-          </Avatar>
+          <CommonAvatar
+            firstName={`${selectedConversation?.name?.split(" ")[0]}`}
+            lastName={`${selectedConversation?.name?.split(" ")[1]}`}
+          />
 
           <Typography>{selectedConversation?.name}</Typography>
         </Stack>
@@ -139,12 +137,12 @@ const ChatWindow = ({ selectedConversation }) => {
           ))}
         </Box>
       </Stack>
-      <Stack direction="row" spacing={2} px={2} pt={1}>
+      <Stack direction='row' spacing={2} px={2} pt={1}>
         <TextField
           fullWidth
-          placeholder="Type a message..."
-          variant="outlined"
-          size="small"
+          placeholder='Type a message...'
+          variant='outlined'
+          size='small'
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
@@ -158,7 +156,7 @@ const ChatWindow = ({ selectedConversation }) => {
             },
           }}
         >
-          <IconButton color="primary" onClick={handleSendMessage}>
+          <IconButton color='primary' onClick={handleSendMessage}>
             <SendIcon />
           </IconButton>
         </Stack>

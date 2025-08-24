@@ -73,17 +73,17 @@ const Login = () => {
       >
         <Stack width={1} justifyContent={"center"} alignItems={"center"}>
           <Stack height={0.5} spacing={2} width={"60%"}>
-            <Typography variant="cardTitle">Login</Typography>
+            <Typography variant='cardTitle'>Login</Typography>
             <Typography>Login to access your OrangeFarm account</Typography>
             <InputField
-              label="Email"
-              name="email"
+              label='Email'
+              name='email'
               value={loginCred?.email}
               onChange={handleInputChange}
             />
             <InputField
-              label="Password"
-              name="password"
+              label='Password'
+              name='password'
               value={loginCred?.password}
               onChange={handleInputChange}
             />
@@ -111,17 +111,17 @@ const Login = () => {
               </Typography>
             </Stack>
             <Button
-              size="large"
-              variant="contained"
-              color="primary"
+              size='large'
+              variant='contained'
+              color='primary'
               onClick={handleLogin}
             >
               Login
             </Button>
-            <Typography variant="mec_body" sx={{ textAlign: "center" }}>
+            <Typography variant='mec_body' sx={{ textAlign: "center" }}>
               Don't have an account?
               <Typography
-                variant="mec_body"
+                variant='mec_body'
                 color={red[400]}
                 sx={{ cursor: "pointer" }}
                 onClick={() => {
@@ -162,7 +162,7 @@ const Login = () => {
                 <Box
                   component={"img"}
                   src={assets.faceBookIcon}
-                  alt="Facebook Icon"
+                  alt='Facebook Icon'
                   sx={{ height: 38, width: 38 }}
                 />
               </Stack>
@@ -183,7 +183,7 @@ const Login = () => {
                 <Box
                   component={"img"}
                   src={assets.googleIcon}
-                  alt="Facebook Icon"
+                  alt='Facebook Icon'
                   sx={{ height: 32, width: 32 }}
                 />
               </Stack>
@@ -204,7 +204,7 @@ const Login = () => {
                 <Box
                   component={"img"}
                   src={assets.appleIcon}
-                  alt="Facebook Icon"
+                  alt='Facebook Icon'
                   sx={{ height: 38, width: 38 }}
                 />
               </Stack>
@@ -213,9 +213,9 @@ const Login = () => {
         </Stack>
         <Stack width={1} justifyContent={"center"} alignItems={"center"}>
           <Box
-            component="img"
+            component='img'
             src={assets.login}
-            alt="Login Image"
+            alt='Login Image'
             width={800}
             height={800}
           />

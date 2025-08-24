@@ -17,7 +17,7 @@ const MessageBubble = ({ message, isSender, name }: any) => {
         <CommonAvatar
           firstName={`${name?.split(" ")[0]}`}
           lastName={`${name?.split(" ")[1]}`}
-          size="small"
+          size='small'
         />
       )}
 
@@ -34,9 +34,9 @@ const MessageBubble = ({ message, isSender, name }: any) => {
           textAlign: "left",
         }}
       >
-        <Typography variant="body2">{message?.text}</Typography>
+        <Typography variant='body2'>{message?.text}</Typography>
         <Typography
-          variant="caption"
+          variant='caption'
           sx={{ opacity: 0.7, fontSize: "10px", mt: 0.5 }}
         >
           {message?.timestamp}
@@ -47,7 +47,7 @@ const MessageBubble = ({ message, isSender, name }: any) => {
         <CommonAvatar
           firstName={`${name?.split(" ")[0]}`}
           lastName={`${name?.split(" ")[1]}`}
-          size="small"
+          size='small'
         />
       )}
     </Box>

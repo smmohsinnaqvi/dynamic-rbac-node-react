@@ -81,53 +81,53 @@ const SignUp = () => {
       >
         <Stack width={1} justifyContent={"center"} alignItems={"center"}>
           <Box
-            component="img"
+            component='img'
             src={assets.signUp}
-            alt="Sign Image"
+            alt='Sign Image'
             width={800}
             height={800}
           />
         </Stack>
         <Stack width={1} justifyContent={"center"} alignItems={"center"}>
           <Stack height={0.7} spacing={2} width={"60%"}>
-            <Typography variant="cardTitle">Sign up</Typography>
+            <Typography variant='cardTitle'>Sign up</Typography>
             <Typography>
               Let’s get you all set up so you can access your personal account.
             </Typography>
 
             <Stack direction={"row"} spacing={2}>
               <InputField
-                label="First Name"
+                label='First Name'
                 value={formData.firstName}
                 onChange={(e) => handleChange("firstName", e.target.value)}
               />
               <InputField
-                label="Last Name"
+                label='Last Name'
                 value={formData.lastName}
                 onChange={(e) => handleChange("lastName", e.target.value)}
               />
             </Stack>
             <Stack direction={"row"} spacing={2}>
               <InputField
-                label="Email"
+                label='Email'
                 value={formData.email}
                 onChange={(e) => handleChange("email", e.target.value)}
               />
               <InputField
-                label="Phone Number"
+                label='Phone Number'
                 value={formData.phone}
                 onChange={(e) => handleChange("phone", e.target.value)}
               />
             </Stack>
             <InputField
-              label="Password"
-              type="password"
+              label='Password'
+              type='password'
               value={formData.password}
               onChange={(e) => handleChange("password", e.target.value)}
             />
             <InputField
-              label="Confirm Password"
-              type="password"
+              label='Confirm Password'
+              type='password'
               value={formData.confirmPassword}
               onChange={(e) => handleChange("confirmPassword", e.target.value)}
             />
@@ -154,15 +154,15 @@ const SignUp = () => {
             </Stack>
 
             <Button
-              size="large"
-              variant="contained"
-              color="primary"
+              size='large'
+              variant='contained'
+              color='primary'
               onClick={signUpUser}
             >
               Create account
             </Button>
 
-            <Typography variant="mec_body">
+            <Typography variant='mec_body'>
               Already have an account?{" "}
               <span
                 style={{ color: red[400], cursor: "pointer" }}
@@ -206,7 +206,7 @@ const SignUp = () => {
                     <Box
                       component={"img"}
                       src={icon}
-                      alt="Auth Icon"
+                      alt='Auth Icon'
                       sx={{ height: 38, width: 38 }}
                     />
                   </Stack>
